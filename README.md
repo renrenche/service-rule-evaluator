@@ -10,14 +10,16 @@ $ npm install --save service-rule-evaluator
 ## Usage
 
 ```js
-var serviceRuleEvaluator = require('service-rule-evaluator');
+const RuleEvaluator = require('service-rule-evaluator');
 
-serviceRuleEvaluator('Rainbow');
+RuleEvaluator.evaluate('123', { eq: 123 });     // true
+RuleEvaluator.evaluate('123', { lte: 123 });    // true
+RuleEvaluator.evaluate('123', { gte: 123 });    // true
 ```
+
 ## License
 
-MIT © [wangshijun]()
-
+MIT © [wangshijun](wangshijun2010@gmail.com)
 
 [npm-image]: https://badge.fury.io/js/service-rule-evaluator.svg
 [npm-url]: https://npmjs.org/package/service-rule-evaluator
