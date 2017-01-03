@@ -38,6 +38,9 @@
   },
   "repository": "renrenche/service-rule-evaluator",
   "scripts": {
+    "release:patch": "npm version patch && git push && git push --tags && npm publish",
+    "release:minor": "npm version minor && git push && git push --tags && npm publish",
+    "release:major": "npm version major && git push && git push --tags && npm publish",
     "prepublish": "gulp prepublish",
     "test": "gulp"
   },
