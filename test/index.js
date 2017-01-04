@@ -43,6 +43,27 @@ describe('service-rule-evaluator', function () {
             expect(evaluator.evaluate(true, { gte: 1, xlt: 2 }, { failOnInvalidRule: true })).to.be.equal(false);
             expect(evaluator.evaluate(true, { gt: 1, xlt: 2 }, { failOnInvalidRule: true })).to.be.equal(false);
         });
+
+        it('should work expected with multiple rules: 1 key', function () {
+            expect(evaluator.evaluate({ age: 10 }, { age: { lt: 0 } })).to.be.equal(false);
+            expect(evaluator.evaluate({ age: 10 }, { age: { gte: 10 } })).to.be.equal(true);
+            expect(evaluator.evaluate({ age: 10 }, { age: { gt: 10 } })).to.be.equal(false);
+            expect(evaluator.evaluate({ age: 10 }, { age: { lte: 10 } })).to.be.equal(true);
+            expect(evaluator.evaluate({ age: 10 }, { age: { lt: 10 } })).to.be.equal(false);
+        });
+
+        it('should work expected with multiple rules: empty rule => true', function () {
+            expect(evaluator.evaluate({ age: 10 }, {})).to.be.equal(true);
+        });
+
+        it('should work expected with multiple rules: missing data => false', function () {
+            expect(evaluator.evaluate({ age: 10 }, { age: { lte: 10 }, gender: { eq: 0 } })).to.be.equal(false);
+        });
+
+        it('should work expected with multiple rules: n key', function () {
+            expect(evaluator.evaluate({ age: 10, gender: 0 }, { age: { lte: 10 }, gender: { eq: 0 } })).to.be.equal(true);
+            expect(evaluator.evaluate({ age: 10, gender: 0 }, { age: { lte: 10 }, gender: { neq: 0 } })).to.be.equal(false);
+        });
     });
 
     describe('#isValidData', function () {
