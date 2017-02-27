@@ -10,11 +10,19 @@ $ npm install --save service-rule-evaluator
 ## Usage
 
 ```js
-const RuleEvaluator = require('service-rule-evaluator');
+const evaluator = require('service-rule-evaluator');
 
-RuleEvaluator.evaluate('123', { eq: 123 });     // true
-RuleEvaluator.evaluate('123', { lte: 123 });    // true
-RuleEvaluator.evaluate('123', { gte: 123 });    // true
+// 判断是否匹配
+evaluator.isMatch('123', { eq: 123 });     // true
+evaluator.isMatch('123', { lte: 123 });    // true
+evaluator.isMatch('123', { gte: 123 });    // true
+
+// 解释和执行
+evaluator.evaluate('count=count+1', { count: 20 });     // { count: 21 }
+evaluator.evaluate('count=count  -1', { count: 20 };    // { count: 19 }
+evaluator.evaluate('count=count*  3', { count: 20 });   // { count: 60 }
+evaluator.evaluate('count=count  /  2', { count: 20 }); // { count: 10 }
+evaluator.evaluate('count = Math.max(count/increment, increment*2);', { count: 20, increment: 2 });     // { count: 10 }
 ```
 
 ## License
