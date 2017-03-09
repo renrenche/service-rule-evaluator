@@ -64,6 +64,18 @@ describe('service-rule-evaluator', function () {
             expect(evaluator.isMatch({ age: 10, gender: 0 }, { age: { lte: 10 }, gender: { eq: 0 } })).to.be.equal(true);
             expect(evaluator.isMatch({ age: 10, gender: 0 }, { age: { lte: 10 }, gender: { neq: 0 } })).to.be.equal(false);
         });
+
+        it('should work expected with multiple rules: string compare', function () {
+            expect(evaluator.isMatch({ age: 10, gender: 'male' }, { age: { lte: 10 }, gender: { eq: 'male' } })).to.be.equal(true);
+            expect(evaluator.isMatch({ age: 10, gender: 'male' }, { age: { lte: 10 }, gender: { neq: 'female' } })).to.be.equal(true);
+        });
+
+        it('should work expected with multiple rules groups', function () {
+            expect(evaluator.isMatch({ age: 10, gender: 0 }, [{ age: { lte: 10 }, gender: { eq: 0 } }])).to.be.equal(true);
+            expect(evaluator.isMatch({ age: 10, gender: 0 }, [{ age: { lte: 5 }, gender: { neq: 0 } }])).to.be.equal(false);
+            expect(evaluator.isMatch({ age: 10, gender: 0 }, [{ age: { lte: 9 } }, { gender: { eq: 0 } }])).to.be.equal(true);
+            expect(evaluator.isMatch({ age: 10, gender: 0 }, [{ age: { lte: 9 } }, { age: { gt: 9 }, gender: { eq: 0 } }])).to.be.equal(true);
+        });
     });
 
     describe('#isValidData', function () {
@@ -75,7 +87,6 @@ describe('service-rule-evaluator', function () {
             expect(evaluator.isValidData()).to.be.equal(false);
             expect(evaluator.isValidData(null)).to.be.equal(false);
             expect(evaluator.isValidData({})).to.be.equal(false);
-            expect(evaluator.isValidData('xxx')).to.be.equal(false);
         });
 
         it('should identify valid data', function () {
@@ -86,7 +97,7 @@ describe('service-rule-evaluator', function () {
         });
     });
 
-    describe.only('#evaluate', function () {
+    describe('#evaluate', function () {
         it('should have #evaluate method', function () {
             expect(evaluator.evaluate).to.be.a('function');
         });
