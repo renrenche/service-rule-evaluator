@@ -19,8 +19,9 @@
   ],
   "devDependencies": {
     "chai": "^3.5.0",
-    "eslint": "^3.1.1",
-    "eslint-config-xo-space": "^0.14.0",
+    "eslint": "^3.17.1",
+    "eslint-config-renrenche": "^1.3.0",
+    "eslint-plugin-import": "^2.2.0",
     "gulp": "^3.9.0",
     "gulp-coveralls": "^0.1.0",
     "gulp-eslint": "^2.0.0",
@@ -32,7 +33,7 @@
     "gulp-plumber": "^1.0.0"
   },
   "eslintConfig": {
-    "extends": "xo-space",
+    "extends": "renrenche",
     "env": {
       "mocha": true
     }
