@@ -13,10 +13,6 @@ describe('service-rule-evaluator', function () {
             expect(evaluator.isMatch(0, {})).to.be.equal(true);
         });
 
-        it('should return false on null values', function () {
-            expect(evaluator.isMatch(null, {})).to.be.equal(false);
-        });
-
         it('should work as expected on single condition', function () {
             expect(evaluator.isMatch(1, { gt: 0 })).to.be.equal(true);
             expect(evaluator.isMatch(1, { gte: 1 })).to.be.equal(true);
