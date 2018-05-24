@@ -111,7 +111,7 @@ describe('service-rule-evaluator', function () {
         });
 
         it('should evaluate correctly on multiple var sandbox', function () {
-            expect(evaluator.evaluate('count=count+increment', { count: 20 }).count).to.equal(20);
+            expect(evaluator.evaluate('count=count+increment', { count: 20, increment: 0 }).count).to.equal(20);
             expect(evaluator.evaluate('count=count-increment', { count: 20, increment: 2 }).count).to.equal(18);
             expect(evaluator.evaluate('count=count*increment', { count: 20, increment: 2 }).count).to.equal(40);
             expect(evaluator.evaluate('count=count/increment', { count: 20, increment: 2 }).count).to.equal(10);
