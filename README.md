@@ -4,13 +4,15 @@
 ## Installation
 
 ```sh
-$ npm install --save service-rule-evaluator
+$ npm install --save @rrc/service-rule-evaluator
+or
+$ yarn add @rrc/service-rule-evaluator -S
 ```
 
 ## Usage
 
 ```js
-const evaluator = require('service-rule-evaluator');
+const evaluator = require('@rrc/service-rule-evaluator');
 
 // 判断是否匹配
 evaluator.isMatch('123', { eq: 123 });     // true
